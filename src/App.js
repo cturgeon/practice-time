@@ -1,15 +1,11 @@
-import { useState } from "react";
 import "./App.css";
+import TimerComponent from "./components/Timer";
 
 function App() {
-  const [timerCountdown, setTimerCountdown] = useState(0);
-
   return (
     <>
       <div>
-        <h1>Set a timer</h1>
-        <p>{timerCountdown}</p>
-        <button>clikjkjkc</button>
+        <TimerComponent />
       </div>
     </>
   );
