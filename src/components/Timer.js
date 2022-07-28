@@ -1,39 +1,52 @@
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import classes from "./Timer.module.css";
 
 // while click pause
 // just do minutes as editable
 
 export default function TimerComponent(props) {
-  const [timer, setTimer] = useState("00:00");
-  const [countdownFlag, steCountdownFlag] = useState(false);
-  const [timerLenth, TimerLenth] = useState(0);
+  const [countdownFlag, setCountdownFlag] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(25);
 
   // TEST: to see if interval can be used
   // instead of setTimeout inside of useeffect
-  setInterval(() => {
+  const interval = setInterval(() => {
     // check if flagged to countdown
     // if so: decriment timer by 1 second
     if (!countdownFlag) {
-      // not sure if return works here
-      // I just want to not execute the following
       return;
     }
-    if (timerLenth > 0) {
-      // change setTimer to reflect current timer
-      if (timer[-2] === "0") {
+    if (seconds > 0) {
+      setSeconds(seconds - 1);
+    }
+    if (seconds === 0) {
+      if (minutes === 0) {
+        setCountdownFlag(false);
+        clearInterval(interval);
+      } else {
+        setMinutes(minutes - 1);
+        setSeconds(59);
       }
     }
   }, 1000);
 
-  const timerHandler = () => {};
+  const timerHandler = () => {
+    // could set to change the button from start to pause
+    // and flip the bool
+    setCountdownFlag(!countdownFlag);
+  };
 
   return (
     <>
       <div className={classes.timer}>
         <h1>Timer Component</h1>
-        <p>{timer}</p>
-        <button onClick={timerHandler}>Start</button>
+        <p>
+          {minutes} : {seconds < 10 ? `0${seconds}` : seconds}
+        </p>
+        <button onClick={timerHandler}>
+          {!countdownFlag ? "Start" : "Pause"}
+        </button>
       </div>
     </>
   );
