@@ -12,7 +12,6 @@ const App = () => {
 
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
-    console.log(total);
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);
     return {
@@ -40,7 +39,7 @@ const App = () => {
     // If you adjust it you should also need to
     // adjust the Endtime formula we are about
     // to code next
-    setTimer("00:10");
+    setTimer("00:00");
 
     // If you try to remove this line the
     // updating of timer Variable will be
@@ -57,7 +56,7 @@ const App = () => {
 
     // This is where you need to adjust if
     // you entend to add more time
-    deadline.setSeconds(deadline.getSeconds() + 10);
+    deadline.setSeconds(deadline.getSeconds() + inputNumber.current.value);
     return deadline;
   };
 
