@@ -56,7 +56,7 @@ const App = () => {
 
     // This is where you need to adjust if
     // you entend to add more time
-    deadline.setSeconds(deadline.getSeconds() + inputNumber.current.value);
+    deadline.setMinutes(deadline.getMinutes() + inputNumber.current.value);
     return deadline;
   };
 
